@@ -6,14 +6,20 @@ public class AllyAI : MonoBehaviour
 {
     //utility
     UtilityScripts utilityScripts;
+    string targetTag = "Enemy";
 
     //stats
-    public int health;
-    public int range = 10;
+    public int health = 100;
+    public int damage = 5;
+    public int attackSpeed = 5;
+    public int attackRange = 10;
+    public int aggroRange = 10;
     public int speed = 1;
+    float elapsedTime = 0;
 
     //target
-    GameObject target;
+    public GameObject target;
+    EnemyAI enemyAI;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +30,24 @@ public class AllyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target != null) {
+        if (target == null) {
+            searchForTarget();
+        } else {
             whatShouldIDoToTarget();
         }
     }
 
+    void searchForTarget() {
+        GameObject potentialTarget = utilityScripts.FindClosestTarget(target, targetTag);
+        if(potentialTarget != null) {
+            setTarget(utilityScripts.inRange(potentialTarget.transform.position, transform.position, aggroRange) ?
+                potentialTarget : null);
+        }
+    }
+
+
     void whatShouldIDoToTarget() {
-        if (utilityScripts.inRange(target.transform.position,transform.position,range)) {
+        if (utilityScripts.inRange(target.transform.position,transform.position, attackRange)) {
             attackTarget();
         } else {
             moveToTarget();
@@ -43,10 +60,25 @@ public class AllyAI : MonoBehaviour
     }
 
     void attackTarget() {
-        Debug.Log("attacking!");
+        if (Time.time > elapsedTime) {
+            if (enemyAI.didIDie(damage)) {
+                searchForTarget();
+            }
+            elapsedTime = Time.time + attackSpeed;
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        target = collision.gameObject;
+    private void setTarget(GameObject newTarget) {
+        target = newTarget;
+        enemyAI = newTarget != null ? target.GetComponent<EnemyAI>() : null;
+    }
+
+    public bool didIDie(int damage) {
+        health -= damage;
+        if (health <= 0) {
+            Destroy(this.gameObject);
+            return true;
+        }
+        return false;
     }
 }
