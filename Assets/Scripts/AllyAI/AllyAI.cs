@@ -13,6 +13,7 @@ public class AllyAI : MonoBehaviour
     //stats
     Unit unit;
     public float currentHealth;
+    Vector3 mostRecentPosition;
     float elapsedTime = 0;
 
     //target
@@ -27,12 +28,17 @@ public class AllyAI : MonoBehaviour
         utilityScripts = GameObject.Find("UtilityScripts").GetComponent<UtilityScripts>();
         healthBarScript = this.transform.Find("HealthBar").GetComponent<HealthBarScript>();
         currentHealth = unit.maxHealth;
+        mostRecentPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update() {
+        
+    }
+
+    void FixedUpdate() {
         searchForTarget();
-        if (target != null) { 
+        if (target != null) {
             whatShouldIDoToTarget();
         }
     }
@@ -42,6 +48,8 @@ public class AllyAI : MonoBehaviour
         if(potentialTarget != null) {
             setTarget(utilityScripts.inRange(potentialTarget.transform.position, transform.position, unit.aggroRange) ?
                 potentialTarget : null);
+        } else {
+            setUnitToStartingPosition();
         }
     }
 
@@ -64,9 +72,14 @@ public class AllyAI : MonoBehaviour
             if (enemyAI.didIDie(unit.damage)) {
                 orchestrator.addToKillCount();
                 searchForTarget();
+                orchestrator.checkAllEnemiesDead();
             }
             elapsedTime = Time.time + unit.attackSpeed;
         }
+    }
+
+    void setUnitToStartingPosition() {
+        transform.position = mostRecentPosition;
     }
 
     private void setTarget(GameObject newTarget) {

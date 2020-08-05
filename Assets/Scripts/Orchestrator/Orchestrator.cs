@@ -15,13 +15,22 @@ public class Orchestrator : MonoBehaviour
         stats = transform.Find("Stats").GetComponent<Stats>();
         mainOverlay = GameObject.Find("MainOverlay").GetComponent<Text>();
         utilityScripts = transform.Find("UtilityScripts").GetComponent<UtilityScripts>();
-        finishRound();
+        pauseGame();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public bool checkAllEnemiesDead() {
+        Debug.Log("checking for all dead enemies");
+        if (utilityScripts.areAllEnemiesDead()) {
+            StartCoroutine(finishRound());
+            return true;
+        }
+        return false;
     }
 
     public int getGoldCount() {
@@ -40,11 +49,18 @@ public class Orchestrator : MonoBehaviour
         stats.removeGold(remove);
     }
 
+    void pauseGame() {
+        Time.timeScale = 0;
+    }
+
     public void startRound() {
         Time.timeScale = 1;
     }
 
-    void finishRound() {
+    IEnumerator finishRound() {
+        Debug.Log("Round Finished");
+        stats.increaseRound();
+        yield return new WaitForSeconds(1);
         Time.timeScale = 0;
     }
 

@@ -9,10 +9,13 @@ public class Stats : MonoBehaviour
     Text goldText;
     public int kills = 0;
     Text killsText;
+    public int round = 1;
+    Text roundText;
 
     private void Start() {
         goldText = GameObject.Find("Gold").GetComponent<Text>();
         killsText = GameObject.Find("Kills").GetComponent<Text>();
+        roundText = GameObject.Find("Round").GetComponent<Text>();
         updateStatsPage();
     }
 
@@ -31,8 +34,14 @@ public class Stats : MonoBehaviour
         updateStatsPage();
     }
 
+    public void increaseRound() {
+        round++;
+        updateStatsPage();
+    }
+
     public void updateStatsPage() {
         goldText.text = "Gold: " + gold;
         killsText.text = "Kills: " + kills;
+        roundText.text = "Round: " + round;
     }
 }

@@ -31,11 +31,9 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         unit = GetComponent<Unit>().getUnit();
-        Debug.Log(unit.speed);
         flag = GameObject.Find("Flag");
         target = flag;
         utilityScripts = GameObject.Find("UtilityScripts").GetComponent<UtilityScripts>();
-        lootBag = GameObject.Find("LootBag");
         currentHealth = unit.maxHealth;
     }
 
@@ -97,7 +95,7 @@ public class EnemyAI : MonoBehaviour
     public bool didIDie(int damage) {
         currentHealth -= damage;
         if(currentHealth <= 0) {
-            Instantiate(lootBag, transform.position, Quaternion.identity);
+            Instantiate(lootBag, transform.position, Quaternion.identity).SetActive(true);
             Destroy(this.gameObject);
             return true;
         }

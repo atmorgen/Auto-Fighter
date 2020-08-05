@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{2A45C282-457D-3AF4-466E-004E9E34BE31}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UnitStats/Minotaur.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Orchestrator/Purchaseable.cs">
     <Files>
-      <File FileName="Assets/Scripts/AllyAI/AllyAI.cs" Line="43" Column="1" IsPinned="True" />
-      <File FileName="Assets/Scripts/Orchestrator/Purchaseable.cs" Line="48" Column="80" />
-      <File FileName="Assets/Scripts/EnemyAI/EnemyAI.cs" Line="34" Column="31" />
-      <File FileName="Assets/Scripts/Orchestrator/Orchestrator.cs" Line="28" Column="27" />
-      <File FileName="Assets/Scripts/UnitStats/Minotaur.cs" Line="15" Column="26" />
-      <File FileName="Assets/Scripts/UnitStats/Warrior.cs" Line="15" Column="24" />
+      <File FileName="Assets/Scripts/AllyAI/AllyAI.cs" Line="25" Column="6" IsPinned="True" />
+      <File FileName="Assets/Scripts/EnemyAI/EnemyAI.cs" Line="33" Column="47" />
+      <File FileName="Assets/Scripts/Orchestrator/Orchestrator.cs" Line="18" Column="18" />
+      <File FileName="Assets/Scripts/Utility/UtilityScripts.cs" Line="37" Column="70" />
+      <File FileName="Assets/Scripts/Orchestrator/Stats.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Orchestrator/Purchaseable.cs" Line="48" Column="29" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,10 +16,11 @@
               <Node name="Scripts" expanded="True">
                 <Node name="AllyAI" expanded="True" />
                 <Node name="EnemyAI" expanded="True" />
-                <Node name="Orchestrator" expanded="True" />
-                <Node name="UnitStats" expanded="True">
-                  <Node name="Minotaur.cs" selected="True" />
+                <Node name="Orchestrator" expanded="True">
+                  <Node name="Purchaseable.cs" selected="True" />
                 </Node>
+                <Node name="UnitStats" expanded="True" />
+                <Node name="Utility" expanded="True" />
               </Node>
             </Node>
           </Node>

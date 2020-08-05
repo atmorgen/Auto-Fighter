@@ -33,6 +33,10 @@ public class UtilityScripts : MonoBehaviour
         ClearEnemies();
     }
 
+    public bool areAllEnemiesDead() {
+        return GameObject.FindGameObjectsWithTag("Enemy").Length -1 == 0;
+    }
+
     public void ClearAllies() {
         GameObject[] allies;
         allies = GameObject.FindGameObjectsWithTag("Ally");

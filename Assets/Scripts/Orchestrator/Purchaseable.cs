@@ -45,9 +45,8 @@ public class Purchaseable : MonoBehaviour
         if (battleField.isMouseInBattlefield) {
             if(orchestrator.getGoldCount() >= unit.cost) {
                 orchestrator.subtractFromGoldCount(unit.cost);
-                Instantiate(purchasedObject, curPosition, Quaternion.identity);
-
-
+                GameObject go = Instantiate(purchasedObject, curPosition, Quaternion.identity);
+                go.SetActive(true);
             } else {
                 Debug.Log("not enough gold");
             }
