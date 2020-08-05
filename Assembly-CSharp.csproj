@@ -64,8 +64,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AllyAI\AllyAI.cs" />
+    <Compile Include="Assets\Scripts\AllyAI\FlagAI.cs" />
     <Compile Include="Assets\Scripts\EnemyAI\EnemyAI.cs" />
-    <Compile Include="Assets\Scripts\UtilityScripts.cs" />
+    <Compile Include="Assets\Scripts\EnemyAI\LootBag.cs" />
+    <Compile Include="Assets\Scripts\Orchestrator\Battlefield.cs" />
+    <Compile Include="Assets\Scripts\Orchestrator\Orchestrator.cs" />
+    <Compile Include="Assets\Scripts\Orchestrator\Purchaseable.cs" />
+    <Compile Include="Assets\Scripts\Orchestrator\StartGameButton.cs" />
+    <Compile Include="Assets\Scripts\Orchestrator\Stats.cs" />
+    <Compile Include="Assets\Scripts\UnitStats\Archer.cs" />
+    <Compile Include="Assets\Scripts\UnitStats\Minotaur.cs" />
+    <Compile Include="Assets\Scripts\UnitStats\Unit.cs" />
+    <Compile Include="Assets\Scripts\UnitStats\Warrior.cs" />
+    <Compile Include="Assets\Scripts\Utility\HealthBarScript.cs" />
+    <Compile Include="Assets\Scripts\Utility\UtilityScripts.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/travis-morgenstern/Desktop/game/Auto-Fighter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

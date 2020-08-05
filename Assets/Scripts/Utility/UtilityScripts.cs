@@ -11,13 +11,12 @@ public class UtilityScripts : MonoBehaviour
     }
 
     //finds closest enemy...
-    public GameObject FindClosestTarget(GameObject previousTarget, string tag) {
+    public GameObject FindClosestTarget(GameObject previousTarget,Vector3 position, string tag) {
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag(tag);
-        gos = gos.Where(go => go != previousTarget).ToArray();
+        //gos = gos.Where(go => go != previousTarget).ToArray();
         GameObject closest = null;
         float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
         foreach (GameObject go in gos) {
             Vector3 diff = go.transform.position - position;
             float curDistance = diff.sqrMagnitude;
@@ -27,5 +26,26 @@ public class UtilityScripts : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    public void clearAll() {
+        ClearAllies();
+        ClearEnemies();
+    }
+
+    public void ClearAllies() {
+        GameObject[] allies;
+        allies = GameObject.FindGameObjectsWithTag("Ally");
+        foreach(GameObject ally in allies) {
+            Destroy(ally);
+        }
+    }
+
+    public void ClearEnemies() {
+        GameObject[] enemies;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies) {
+            Destroy(enemy);
+        }
     }
 }

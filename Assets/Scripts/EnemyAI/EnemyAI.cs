@@ -8,46 +8,52 @@ public class EnemyAI : MonoBehaviour
     UtilityScripts utilityScripts;
     string targetTag = "Ally";
 
+    //lootbag
+    public GameObject lootBag;
+
     //flag
     GameObject flag;
 
     //target information
     public GameObject target;
     AllyAI targetAI;
+    FlagAI flagAI;
 
     //this information
     Vector3 enemyPosition;
 
     //stats
-    public int health = 50;
-    public int damage = 10;
-    public int attackSpeed = 5;
-    public int speed = 1;
-    public int attackRange = 1;
-    public int aggroRange = 10;
+    Unit unit;
+    public float currentHealth;
     float elapsedTime = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        unit = GetComponent<Unit>().getUnit();
+        Debug.Log(unit.speed);
         flag = GameObject.Find("Flag");
         target = flag;
         utilityScripts = GameObject.Find("UtilityScripts").GetComponent<UtilityScripts>();
+        lootBag = GameObject.Find("LootBag");
+        currentHealth = unit.maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(target == flag) {
+        if(flag != null) {
             searchForTarget();
         }
-        whatShouldIDoToTarget();
+        if(target != null) {
+            whatShouldIDoToTarget();
+        }
     }
 
     void searchForTarget() {
-        GameObject potentialTarget = utilityScripts.FindClosestTarget(target, targetTag);
+        GameObject potentialTarget = utilityScripts.FindClosestTarget(target,transform.position, targetTag);
         bool potentialTargetInRange = potentialTarget != null ?
-            utilityScripts.inRange(potentialTarget.transform.position, transform.position, aggroRange) : false;
+            utilityScripts.inRange(potentialTarget.transform.position, transform.position, unit.aggroRange) : false;
         if (potentialTargetInRange) {
             setTarget(potentialTarget);
         } else {
@@ -56,7 +62,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     void whatShouldIDoToTarget() {
-        if (utilityScripts.inRange(target.transform.position, transform.position, attackRange)) {
+        if (utilityScripts.inRange(target.transform.position, transform.position, unit.attackRange)) {
             attackTarget();
         } else {
             moveToTarget();
@@ -64,27 +70,34 @@ public class EnemyAI : MonoBehaviour
     }
 
     void moveToTarget() {
-        float step = speed * Time.deltaTime;
+        float step = unit.speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
     }
 
     void attackTarget() {
         if (Time.time > elapsedTime) {
-            if (targetAI.didIDie(damage)) {
+            if(target == flag) {
+                flagAI.didIDie(unit.damage);
+            } else if (targetAI.didIDie(unit.damage)) {
                 searchForTarget();
             }
-            elapsedTime = Time.time + attackSpeed;
+            elapsedTime = Time.time + unit.attackSpeed;
         }
     }
 
     private void setTarget(GameObject newTarget) {
         target = newTarget;
-        targetAI = target == flag ? null : target.GetComponent<AllyAI>();
+        if(target == flag) {
+            flagAI = target.GetComponent<FlagAI>();
+        } else {
+            targetAI = target.GetComponent<AllyAI>();
+        }
     }
 
     public bool didIDie(int damage) {
-        health -= damage;
-        if(health <= 0) {
+        currentHealth -= damage;
+        if(currentHealth <= 0) {
+            Instantiate(lootBag, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
             return true;
         }

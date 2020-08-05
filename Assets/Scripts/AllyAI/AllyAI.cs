@@ -6,15 +6,13 @@ public class AllyAI : MonoBehaviour
 {
     //utility
     UtilityScripts utilityScripts;
+    HealthBarScript healthBarScript;
+    Orchestrator orchestrator;
     string targetTag = "Enemy";
 
     //stats
-    public int health = 100;
-    public int damage = 5;
-    public int attackSpeed = 5;
-    public int attackRange = 10;
-    public int aggroRange = 10;
-    public int speed = 1;
+    Unit unit;
+    public float currentHealth;
     float elapsedTime = 0;
 
     //target
@@ -24,30 +22,32 @@ public class AllyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        utilityScripts = GameObject.Find("UtilityScripts").GetComponent<UtilityScripts>();   
+        unit = GetComponent<Unit>().getUnit();
+        orchestrator = GameObject.Find("Orchestrator").GetComponent<Orchestrator>();
+        utilityScripts = GameObject.Find("UtilityScripts").GetComponent<UtilityScripts>();
+        healthBarScript = this.transform.Find("HealthBar").GetComponent<HealthBarScript>();
+        currentHealth = unit.maxHealth;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (target == null) {
-            searchForTarget();
-        } else {
+    void Update() {
+        searchForTarget();
+        if (target != null) { 
             whatShouldIDoToTarget();
         }
     }
 
     void searchForTarget() {
-        GameObject potentialTarget = utilityScripts.FindClosestTarget(target, targetTag);
+        GameObject potentialTarget = utilityScripts.FindClosestTarget(target,transform.position, targetTag);
         if(potentialTarget != null) {
-            setTarget(utilityScripts.inRange(potentialTarget.transform.position, transform.position, aggroRange) ?
+            setTarget(utilityScripts.inRange(potentialTarget.transform.position, transform.position, unit.aggroRange) ?
                 potentialTarget : null);
         }
     }
 
 
     void whatShouldIDoToTarget() {
-        if (utilityScripts.inRange(target.transform.position,transform.position, attackRange)) {
+        if (utilityScripts.inRange(target.transform.position,transform.position, unit.attackRange)) {
             attackTarget();
         } else {
             moveToTarget();
@@ -55,16 +55,17 @@ public class AllyAI : MonoBehaviour
     }
 
     void moveToTarget() {
-        float step = speed * Time.deltaTime;
+        float step = unit.speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
     }
 
     void attackTarget() {
         if (Time.time > elapsedTime) {
-            if (enemyAI.didIDie(damage)) {
+            if (enemyAI.didIDie(unit.damage)) {
+                orchestrator.addToKillCount();
                 searchForTarget();
             }
-            elapsedTime = Time.time + attackSpeed;
+            elapsedTime = Time.time + unit.attackSpeed;
         }
     }
 
@@ -74,11 +75,12 @@ public class AllyAI : MonoBehaviour
     }
 
     public bool didIDie(int damage) {
-        health -= damage;
-        if (health <= 0) {
+        currentHealth -= damage;
+        if (currentHealth <= 0) {
             Destroy(this.gameObject);
             return true;
         }
+        healthBarScript.updateHealthBar(currentHealth, unit.maxHealth);
         return false;
     }
 }
