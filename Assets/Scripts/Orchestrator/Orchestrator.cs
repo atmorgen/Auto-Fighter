@@ -18,12 +18,6 @@ public class Orchestrator : MonoBehaviour
         pauseGame();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public bool checkAllEnemiesDead() {
         Debug.Log("checking for all dead enemies");
         if (utilityScripts.areAllEnemiesDead()) {
