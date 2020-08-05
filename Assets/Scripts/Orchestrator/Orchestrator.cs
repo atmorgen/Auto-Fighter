@@ -12,7 +12,6 @@ public class Orchestrator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         stats = transform.Find("Stats").GetComponent<Stats>();
         mainOverlay = GameObject.Find("MainOverlay").GetComponent<Text>();
         utilityScripts = transform.Find("UtilityScripts").GetComponent<UtilityScripts>();
@@ -23,6 +22,10 @@ public class Orchestrator : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public int getGoldCount() {
+        return stats.gold;
     }
 
     public void addToKillCount() {

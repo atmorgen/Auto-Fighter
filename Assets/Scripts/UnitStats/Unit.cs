@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    public int cost;
     public float maxHealth;
     public int damage;
     public int attackSpeed;

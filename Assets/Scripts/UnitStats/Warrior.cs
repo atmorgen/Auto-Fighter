@@ -8,11 +8,12 @@ public class Warrior : Unit {
     }
 
     public Warrior() {
+        cost = 3;
         maxHealth = 150;
         damage = 20;
         attackSpeed = 5;
-        attackRange = 5;
-        aggroRange = 15;
-        speed = 75;
+        attackRange = 25;
+        aggroRange = 150;
+        speed = 15;
     }
 }

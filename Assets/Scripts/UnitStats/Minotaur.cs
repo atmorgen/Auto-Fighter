@@ -12,8 +12,8 @@ public class Minotaur : Unit
         maxHealth = 50;
         damage = 10;
         attackSpeed = 5;
-        attackRange = 10;
-        aggroRange = 15;
-        speed = 50;
+        attackRange = 25;
+        aggroRange = 150;
+        speed = 15;
     }
 }

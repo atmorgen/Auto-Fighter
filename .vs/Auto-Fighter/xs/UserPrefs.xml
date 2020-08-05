@@ -1,11 +1,12 @@
 ﻿<Properties StartupConfiguration="{2A45C282-457D-3AF4-466E-004E9E34BE31}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyAI/EnemyAI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UnitStats/Minotaur.cs">
     <Files>
-      <File FileName="Assets/Scripts/Orchestrator/Purchaseable.cs" Line="40" Column="38" />
-      <File FileName="Assets/Scripts/UnitStats/Archer.cs" Line="17" Column="24" />
-      <File FileName="Assets/Scripts/UnitStats/Minotaur.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyAI/EnemyAI.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/AllyAI/AllyAI.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/AllyAI/AllyAI.cs" Line="43" Column="1" IsPinned="True" />
+      <File FileName="Assets/Scripts/Orchestrator/Purchaseable.cs" Line="48" Column="80" />
+      <File FileName="Assets/Scripts/EnemyAI/EnemyAI.cs" Line="34" Column="31" />
+      <File FileName="Assets/Scripts/Orchestrator/Orchestrator.cs" Line="28" Column="27" />
+      <File FileName="Assets/Scripts/UnitStats/Minotaur.cs" Line="15" Column="26" />
+      <File FileName="Assets/Scripts/UnitStats/Warrior.cs" Line="15" Column="24" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,11 +15,11 @@
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
                 <Node name="AllyAI" expanded="True" />
-                <Node name="EnemyAI" expanded="True">
-                  <Node name="EnemyAI.cs" selected="True" />
-                </Node>
+                <Node name="EnemyAI" expanded="True" />
                 <Node name="Orchestrator" expanded="True" />
-                <Node name="UnitStats" expanded="True" />
+                <Node name="UnitStats" expanded="True">
+                  <Node name="Minotaur.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>

@@ -10,6 +10,7 @@ public class Archer : Unit
     }
 
     public Archer() {
+        cost = 5;
         maxHealth = 100;
         damage = 5;
         attackSpeed = 5;
